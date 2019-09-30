@@ -1,5 +1,8 @@
 <% provide(:title, t(".title")) %>
 <div class="container">
+  <div class="new_user">
+    <%= link_to "Create user", new_admin_user_path %>
+  </div>
   <table class="center">
     <% @users.in_groups_of(Settings.cols, false) do |row_users| %>
       <tr>
@@ -9,5 +12,4 @@
       </tr>
     <% end %>
   </table>
-  <%= will_paginate %>
 </div>

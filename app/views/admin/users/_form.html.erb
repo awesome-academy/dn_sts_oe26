@@ -1,0 +1,23 @@
+<%= form_for(@user) do |f| %>
+
+  <%= f.label t "users.new.name" %>
+  <%= f.text_field :name, class: "form-control" %>
+
+  <%= f.label t "users.new.email" %>
+  <%= f.email_field :email, class: "form-control" %>
+
+  <%= f.label t "users.new.password" %>
+  <%= f.password_field :password, class: "form-control" %>
+
+  <%= f.label t "users.new.confi" %>
+  <%= f.password_field :password_confirmation, class: "form-control" %>
+
+  <%= f.label :lb_birthday, t(".lb_birthday"), class: "col" %>
+  <%= f.date_field :birthday, class: "form-control" %>
+
+  <%= f.label t "users.new.company" %>
+  <%= f.text_field :company, class: "form-control" %>
+
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary" %>
+<% end %>

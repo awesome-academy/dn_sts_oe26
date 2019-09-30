@@ -15,14 +15,12 @@
     </p>
     <% if current_user.admin? && !current_user?(user) %>
       <div class="row-sm-2 btn-card", id="card-btn">
-        <%= button_to t(".btn_delete"), admin_delete_path(id: user.id),
+        <%= button_to t(".btn_delete"), admin_user_path(id: user.id),
           method: :delete, class: "btn btn-outline-danger float-left",
           data: { confirm: t(".confirm_delete", name: user.name)} %>
-        <% unless user.activated? %>
-          <%= button_to t(".btn_active"), admin_activation_path(id: user.id),
+        <%= button_to t(".btn_active"),"",
             method: :put, class: "btn btn-outline-success float-right",
             data: { confirm: t(".confirm_active", name: user.name)} %>
-        <% end %>
       </div>
     <% end %>
   </div>

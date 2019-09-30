@@ -1,9 +1,23 @@
 class Admin::UsersController < AdminController
-  before_action :load_user, except: :index
-  before_action :load_params, only: :index
+  before_action :load_user, except: [:index, :new]
+
   def index
-    @users = User.load_users(@type).order_by.paginate page: @page,
-      per_page: Settings.per_page
+    @users = User.all
+  end
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    user = User.new param_users
+    if @user.save
+      @user.send_activation_email
+      flash[:info] = t "users.new.please_check_mail"
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   def destroy
@@ -26,8 +40,10 @@ class Admin::UsersController < AdminController
     render "shared/not_found"
   end
 
-  def load_params
-    @page = params[:page]
-    @type = params[:type]
+  def param_users
+    params.require(:user).permit(:name, :email,
+                                 :password, :password_confirmation,
+                                 :birthday, :company, :gradution,
+                                 :university, :address, :role, :gender )
   end
 end
