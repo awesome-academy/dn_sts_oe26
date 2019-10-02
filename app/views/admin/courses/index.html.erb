@@ -1,0 +1,11 @@
+<% provide(:title, t(".title")) %>
+<div class="container">
+  <div class="new_course">
+    <%= link_to t(".create_course"), new_admin_course_path %>
+  </div>
+  <table class="center">
+    <% @courses.each do |course| %>
+      <td><%= render course %></td>
+    <% end %>
+  </table>
+</div>

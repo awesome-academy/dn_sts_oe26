@@ -1,0 +1,24 @@
+<div class="card-profile">
+  <%= image_tag("avatar.png", alt: "card image") %>
+  <div class="card-body">
+    <h5 class="card-title">
+      <%= link_to course.name, "#" %>
+    </h5>
+    <p class="card-text">
+      <%= course.content %>
+    </p>
+    <p class="card-text">
+      <%= t ",status" %>: <%= course.status %>
+    </p>
+    <%= link_to t(".show"), admin_course_path(course), class: "btn btn-outline-success float-right" %>
+    <p class="card-text">
+      <%= course.start_date %>
+    </p>
+    <div class="row-sm-2 btn-card", id="card-btn">
+      <%= button_to t(".delete"), admin_course_path(course),
+        method: :delete, class: "btn btn-outline-danger float-left",
+        data: { confirm: "you sure? "} %>
+      <%= link_to t(".update"), edit_admin_course_path(course), class: "btn btn-outline-success float-right" %>
+    </div>
+  </div>
+</div>

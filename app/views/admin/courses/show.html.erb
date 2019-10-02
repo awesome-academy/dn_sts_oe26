@@ -1,0 +1,28 @@
+<h3> <%= t ".subject"%> </h3>
+<div class="new_user">
+  <%= link_to "Create users", new_admin_user_path %>
+</div>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">  Name </th>
+      <th scope="col"> subject_duration </th>
+      <th scope="col"> subject_details </th>
+      <th scope="col">  </th>
+      <th scope="col">  </th>
+    </tr>
+  </thead>
+    <% @course_subjects.each_with_index do |subject, x| %>
+      <tbody>
+          <tr>
+            <td> <%= x+1 %> </td>
+            <td> <%= subject.subject_name %> </td>
+            <td> <%= subject.subject_duration %> </td>
+            <td> <%= subject.subject_details %> </td>
+            <td> <%= x+1 %> </td>
+            <td> <%= x+1 %> </td>
+          </tr>
+      </tbody>
+    <% end %>
+</table>

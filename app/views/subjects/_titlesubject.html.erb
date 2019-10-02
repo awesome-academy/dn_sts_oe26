@@ -3,6 +3,6 @@
   <%= link_to @subject.name, "#" %>
   <% if current_user.trainer?  %>
     <%= link_to '<i class="fa fa-refresh" aria-hidden="true"></i>'.html_safe,
-      edit_course_subject_path(course_id: params[:course_id], id: @subject.id), class: "float-right" %>
+          edit_course_subject_path(course_id: params[:course_id], id: @subject.id), class: "float-right" %>
   <% end %>
 </div>

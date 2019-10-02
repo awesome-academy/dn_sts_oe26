@@ -1,0 +1,32 @@
+<%= form_for(@course, url: admin_courses_path) do |f| %>
+
+  <%= f.label t ".name" %>
+  <%= f.text_field :name, class: "form-control" %>
+
+  <%= f.label t ".content" %>
+  <%= f.text_field :content, class: "form-control" %>
+
+  <%= f.label t(".start_date"), class: "col" %>
+  <%= f.date_field :start_date, class: "form-control" %>
+
+  <%= f.label t ".status" %>
+  <div class="col">
+    <%= f.radio_button :status, Course.statuses.key(Course.statuses[:archive]), class: "col-sm-1" %>
+    <%= t ".archive" %>
+    <%= f.radio_button :status, Course.statuses.key(Course.statuses[:running]), class: "col-sm-1" %>
+    <%= t ".running" %>
+    <%= f.radio_button :status, Course.statuses.key(Course.statuses[:finish]), class: "col-sm-1" %>
+    <%= t ".finish" %>
+  </div>
+
+  <%= f.label t ".location" %>
+  <div class="col">
+    <%= f.radio_button :location, Course.locations.key(Course.locations[:da_nang]), class: "col-sm-1" %>
+    <%= t ".da_nang" %>
+    <%= f.radio_button :location, Course.locations.key(Course.locations[:tp_hcm]), class: "col-sm-1" %>
+    <%= t ".tp_hcm" %>
+    <%= f.radio_button :location, Course.locations.key(Course.locations[:ha_noi]), class: "col-sm-1" %>
+    <%= t ".ha_noi" %>
+  </div>
+  <%= f.submit t(".create"), class: "btn btn-primary" %>
+<% end %>

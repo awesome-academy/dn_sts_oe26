@@ -100,11 +100,17 @@ en:
         trainee: Trainee
         trainer: Trainer
         admin: admin
+<<<<<<< 72be9f7927f196f441c93f4b1b7edb06d9478244
         create: Create
         deleted: "Deleted"
       edit:
         edit: Edit user
         not_admin: "You not admin ?"
+=======
+        update: Update
+      edit:
+        edit: Edit user
+>>>>>>> hello
       destroy:
         delete_success: "Successfully delete user %{name}"
         delete_fail: "Failed delete user %{name}"

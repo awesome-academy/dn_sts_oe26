@@ -1,5 +1,4 @@
 class Course < ApplicationRecord
-  attr_accessor :locations, :statuses
 
   has_many :course_users, dependent: :destroy
   has_many :users, through: :course_users
