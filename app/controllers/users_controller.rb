@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :check_login, only: [:new]
   before_action :load_user, only: [:show, :edit, :update]
 
   def new
@@ -12,12 +13,9 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new user_params
-    if @user.valid?
-      session[:code] = rand(100_000..999_999)
-      session[:user_params] = user_params
-      UserMailer.confirm_email(user_params[:email], session).deliver_now
-      flash[:info] = t ".check_mail_code"
-      render :confirm_email
+    if @user.save
+      flash[:success] = t ".create_success"
+      redirect_to root_path
     else
       render :new
     end
@@ -47,5 +45,9 @@ class UsersController < ApplicationController
     return if @user
     flash["danger"] = t "courses.notfound.notfound"
     redirect_to notfound_path
+  end
+
+  def check_login
+    redirect_to courses_path if logged_in?
   end
 end

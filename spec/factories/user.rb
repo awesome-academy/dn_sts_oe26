@@ -9,8 +9,8 @@ FactoryBot.define do
     company {Faker::Company.bs}
     university {Faker::University.name}
     address {Faker::Address.street_address}
-    role {User.roles[:trainee]}
-    gender {User.genders[:male]}
+    role {'trainee'}
+    gender {'male'}
     joined {false}
     activated {true}
     deleted {false}
@@ -25,8 +25,8 @@ FactoryBot.define do
     company {Faker::Company.bs}
     university {Faker::University.name}
     address {Faker::Address.street_address}
-    role {User.roles[:trainee]}
-    gender {User.genders[:male]}
+    role {'trainee'}
+    gender {'male'}
     joined {false}
     activated {true}
     deleted {false}
