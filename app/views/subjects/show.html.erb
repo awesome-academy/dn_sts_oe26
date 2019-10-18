@@ -8,9 +8,6 @@
     <div class="details">
       <%= @subject.details %>
     </div>
-    <% if current_user.trainer?  %>
-      <%= link_to t(".edit"), edit_course_subject_path(course_id: params[:course_id], id: @subject.id) %>
-    <% end %>
     <%= render "subjects/sidebarmember" %>
     <div class="content">
       <% @subject.tasks.each_with_index do |task, x| %>
@@ -18,7 +15,7 @@
           <div id="<%= x+1 %>">
             <h3> <%= task.title %> </h3>
             <p> <%= task.content %> </p>
-            <% unless current_user.trainee?  %>
+            <% if can? [ :update, :destroy], task  %>
               <div class="float-right">
                 <%= link_to '<i class="fa fa-refresh" aria-hidden="true"></i>'.html_safe,
                       edit_task_path(id: task, course_id: params[:course_id],
@@ -30,25 +27,27 @@
             <% end %>
           </div>
         </div>
-        <% if current_user.trainee? && @course_user.joinning? %>
-          <% unless check_status? params[:subject_status] %>
-            <div class="report">
-              <h3> <%= t ".reporttask" %> </h3>
-              <%= form_for(:usercoursetask, url: user_course_tasks_path, remote: true) do |f| %>
-                <div class="row">
-                  <%= f.hidden_field :task_id, value: task.id %>
-                  <%= f.hidden_field :join_date, value: params[:join_date] %>
-                  <%= f.hidden_field :course_id, value: params[:course_id] %>
-                  <div class="col-sm-3">
-                    <%= f.file_field :file_excel, class: "btn btn-sm float-left" %>
+        <% if @course_user.joinning? %>
+          <% if can? :create, task %>
+            <% unless check_status? params[:subject_status] %>
+              <div class="report">
+                <h3> <%= t ".reporttask" %> </h3>
+                <%= form_for(:usercoursetask, url: user_course_tasks_path, remote: true) do |f| %>
+                  <div class="row">
+                    <%= f.hidden_field :task_id, value: task.id %>
+                    <%= f.hidden_field :join_date, value: params[:join_date] %>
+                    <%= f.hidden_field :course_id, value: params[:course_id] %>
+                    <div class="col-sm-3">
+                      <%= f.file_field :file_excel, class: "btn btn-sm float-left" %>
+                    </div>
+                    <div class="col-sm-3 message"></div>
+                    <div class="col-sm-3">
+                      <%= f.submit t(".report"), class: "btn btn-primary" %>
+                    </div>
                   </div>
-                  <div class="col-sm-3 message"></div>
-                  <div class="col-sm-3">
-                    <%= f.submit t(".report"), class: "btn btn-primary" %>
-                  </div>
-                </div>
-              <% end %>
-            </div>
+                <% end %>
+              </div>
+            <% end %>
           <% end %>
         <% end %>
       <% end %>

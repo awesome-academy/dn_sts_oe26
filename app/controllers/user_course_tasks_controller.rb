@@ -1,6 +1,7 @@
 class UserCourseTasksController < ApplicationController
+  authorize_resource
   before_action :load_user_course_task, only: [:edit, :update, :destroy]
-
+  
   def create
     @usercoursetaskser = current_user.user_course_tasks.build user_course_task_params
     respond_to do |format|

@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  authorize_resource
   before_action :load_task, only: [:edit, :update, :destroy]
 
   def create

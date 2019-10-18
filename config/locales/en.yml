@@ -1,4 +1,8 @@
 en:
+  controllers:
+    application:
+      not_permition: "Failed"
+      login_please: "Please login"
   devise:
     shared:
       links:

@@ -1,10 +1,16 @@
 <li>
-  <% unless sub.no_active? %>
-    <%= link_to load_name(sub.subject_name, sub.subject_duration),course_subject_path(@course,id: sub.subject_id, subject_status: sub.status, join_date: params[:join_date] ), class: sub.status %>
+  <% if current_user.trainer? %>
+      <%= link_to load_name(sub.subject_name, sub.subject_duration),course_subject_path(@course,id: sub.subject_id, subject_status: sub.status, join_date: params[:join_date] )%>
+    <p class="float-right"> <%= l @course.start_date.next_day(sub.subject_duration), format: :long %> </p>
+    <h5> <%= sub.subject_details %> </h5>
   <% else %>
-    <%= link_to load_name(sub.subject_name, sub.subject_duration),"#" %>
+    <% unless sub.no_active? %>
+    <%= link_to load_name(sub.subject_name, sub.subject_duration),course_subject_path(@course,id: sub.subject_id, subject_status: sub.status, join_date: params[:join_date] ), class: sub.status %>
+    <% else %>
+      <%= link_to load_name(sub.subject_name, sub.subject_duration),"#" %>
+    <% end %>
+    <p class="float-right"> <%= l @course.start_date.next_day(sub.subject_duration), format: :long %> </p>
+    <h5> <%= t ".status" %>: <%= sub.status %> </h5>
+    <h5> <%= sub.subject_details %> </h5>
   <% end %>
-  <p class="float-right"> <%= l @course.start_date.next_day(sub.subject_duration), format: :long %> </p>
-  <h5> <%= t ".status" %>: <%= sub.status %> </h5>
-  <h5> <%= sub.subject_details %> </h5>
 </li>

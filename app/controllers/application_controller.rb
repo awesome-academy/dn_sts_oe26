@@ -42,4 +42,15 @@ class ApplicationController < ActionController::Base
     flash[:warning] = t ".not_authorized"
     redirect_to(request.referrer || root_path)
   end
+
+  rescue_from CanCan::AccessDenied do |_exception|
+    if user_signed_in?
+      flash[:danger] = t "controllers.application.not_permition"
+      redirect_to courses_path
+    else
+      flash[:danger] = t "controllers.application.login_please"
+      redirect_to new_user_session_path
+    end
+  end
+
 end
