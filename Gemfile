@@ -7,7 +7,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "bootsnap", ">= 1.1.0", require: false
 gem "bootstrap", "~> 4.3", ">= 4.3.1"
 gem "bootstrap-will_paginate", "~> 1.0.0"
-gem "carrierwave", "1.2.2"
+gem "carrierwave", "1.3.2"
 gem "coffee-rails", "~> 4.2"
 gem "config"
 gem "faker", "~> 2.1.0"
